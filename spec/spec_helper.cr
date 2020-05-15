@@ -6,7 +6,7 @@ require "./support/**"
 require "../config/*"
 
 backend = Log::IOBackend.new(STDERR)
-backend.formatter = Dexter::JSONLogFormatter.proc
+backend.formatter = Log::Formatter.new(Dexter::JSONLogFormatter.proc)
 Log.builder.bind("avram.*", :error, Log::IOBackend.new(STDERR))
 
 Db::Create.new(quiet: true).call
